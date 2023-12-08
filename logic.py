@@ -79,6 +79,22 @@ class Logic(QMainWindow, Ui_MainWindow):
             x: str | None = self.students.pop(self.input_del.text())
             if x is None:
                 raise KeyError
+            best: float = 0
+            for i in self.students:
+                if self.students[i][0] > best:
+                    best = self.students[i][0]
+
+            for i in self.students:
+                if self.students[i][0] >= best - 10:
+                    self.students[i][1] = 'A'
+                elif self.students[i][0] >= best - 20:
+                    self.students[i][1] = 'B'
+                elif self.students[i][0] >= best - 30:
+                    self.students[i][1] = 'C'
+                elif self.students[i][0] >= best - 40:
+                    self.students[i][1] = 'D'
+                else:
+                    self.students[i][1] = 'F'
             self.update()
         except KeyError:
             self.label_main.setText("No student with that name was found")
